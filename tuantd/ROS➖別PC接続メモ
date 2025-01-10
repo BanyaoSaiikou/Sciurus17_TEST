@@ -1,0 +1,42 @@
+ROS：別PCの接続についてのメモ
+
+Sciurus17のIP：10.40.1.84
+kambaPCのIP：10.40.0.42
+caiPCのIP：10.40.0.0.144
+
+手順：
+Sciurus17と別PCのターミナルに
+
+＄　ifconfig
+
+と入力する。PCのIPや使用状況を表示してくれる。
+その後、Sciurus17のターミナルに
+
+$ ping 10.40.0.42
+
+と入力し(接続予定のPCのIP)、別PCには
+
+$ ping 10.40.1.84
+
+と入力する（Sciurus17のIP）。
+次にSciurus17のターミナルに
+
+$ export ROS_IP="hostname -I| cut -d' ' -f1"
+$ roslaunch sciurus17_bringup sciurus17_bringup.launch
+
+と入力する。ROS_IPでROSにSciurus17PCのIPを割り当てる。
+"hostname -I| cut -d' ' -f1"は使用しているPCのIPを表示してくれる。
+割り当てた後にマスターノードを起動する
+この際、"hostname -I| cut -d' ' -f1"でIPを割り当てられない場合、
+
+$ export ROS_IP=10.40.1.84
+
+と入力する。そして、別PCには、
+
+$ export ROS_MASTER_URI=http://10.40.1.84:11311
+$ export ROS_IP="hostname -I| cut -d' ' -f1"
+$ rosnode list
+
+と入力する。ROS_MASTER_URIではマスターノードがあるIPを割当る（今回はSciurus17のIP）
+後に、Sciurus17ターミナルと同じようにRosにIPを割り当てる。
+最後にrosnode listを入力すると、Sciurus17の起動しているノードが別PCターミナルに表示される

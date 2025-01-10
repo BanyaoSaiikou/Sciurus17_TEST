@@ -1,0 +1,4 @@
+<launch>
+  <node name="tuantd_test_2" pkg="sciurus17_examples" type="tuantd_test_2" output="screen"/>
+  <node name="tuantd_test_1" pkg="sciurus17_examples" type="tuantd_test_1.py" output="screen"/>
+</launch>

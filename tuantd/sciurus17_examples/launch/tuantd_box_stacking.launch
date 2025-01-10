@@ -1,0 +1,4 @@
+<launch>
+  <node name="tuantd_object_position" pkg="sciurus17_examples" type="tuantd_object_position" output="screen"/>
+  <node name="tuantd_box_stacking" pkg="sciurus17_examples" type="tuantd_box_stacking.py" output="screen"/>
+</launch>
